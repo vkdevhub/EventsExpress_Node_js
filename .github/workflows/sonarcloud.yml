@@ -19,11 +19,19 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install Dependencies
-        run: 'npm install'
-        
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+      #- name: Install Dependencies
+      #  run: 'npm install'
+      - name: Install dependencies
+        run: yarn
+      
+      - name: Test and coverage
+        run: yarn jest --coverage
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+      
+      #- name: Analyze with SonarCloud
+      #  uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
           #args:
