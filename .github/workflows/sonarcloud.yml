@@ -13,25 +13,27 @@ jobs:
       - name: Checkout code  
         uses: actions/checkout@v4
 
-      #- name: Set up node
-      #  uses: actions/setup-node@v4
-      #  with:
-      #    node-version: 20
-      #    cache: 'npm'
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
-      #- name: Install Dependencies
-      #  run: 'npm install'
-      - name: Install dependencies
-        run: yarn
+      - name: Install Dependencies
+        run: 'npm install'
+      #- name: Install dependencies
+      #  run: yarn
       
-      - name: Test and coverage
-        run: yarn jest --coverage
+      #- name: Test and coverage
+      #  run: yarn jest --coverage
+      - name: Run test
+        run: 'npm test'
       
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      #- name: SonarCloud Scan
+      #  uses: SonarSource/sonarcloud-github-action@master
       
-      #- name: Analyze with SonarCloud
-      #  uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+      - name: Analyze with SonarCloud
+        uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
           #args:
