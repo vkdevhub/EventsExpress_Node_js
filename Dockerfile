@@ -2,7 +2,9 @@ FROM node
 
 WORKDIR /app
 
-COPY . .
+ADD src /src/
+ADD package.json /
+ADD package-lock.json /
 
 RUN npm install
 
