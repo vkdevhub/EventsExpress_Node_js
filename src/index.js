@@ -1,5 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const { startApp } = require("./databaseSetup");
 const ourLogger = require("./logger");
