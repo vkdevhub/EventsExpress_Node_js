@@ -1,17 +1,26 @@
 name: SonarCloud analysis
-
 on:
   #push:
-  #  branches: [ "main" ]
+  #  branches:
+  #    - main
+  #pull_request:
+  #  types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
-  Analysis:
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code  
+      - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       #- name: Set up node
       #  uses: actions/setup-node@v4
@@ -32,10 +41,10 @@ jobs:
       #- name: SonarCloud Scan
       #  uses: SonarSource/sonarcloud-github-action@master
       
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+      #- name: Analyze with SonarCloud
+      #  uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+      #  env:
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
           #args:
             # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
             # mandatory
@@ -48,4 +57,4 @@ jobs:
             # Adds more detail to both client and server-side analysis logs, activating DEBUG mode for the scanner, and adding client-side environment variables and system properties to the server-side log of analysis report processing.
             #-Dsonar.verbose= # optional, default is false
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
-          projectBaseDir: .
+       #   projectBaseDir: .
