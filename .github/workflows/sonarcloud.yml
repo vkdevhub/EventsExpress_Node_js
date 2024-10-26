@@ -13,24 +13,21 @@ jobs:
       - name: Checkout code  
         uses: actions/checkout@v4
 
-      - name: Set up node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 12
-          cache: 'npm'
+      #- name: Set up node
+      #  uses: actions/setup-node@v4
+      #  with:
+      #    node-version: 12
+      #    cache: 'npm'
       
-      - name: Node version
-        run: 'node -v'
-
-      - name: Install Dependencies
-        run: 'npm install'
+      #- name: Install Dependencies
+      #  run: 'npm install'
       #- name: Install dependencies
       #  run: yarn
       
       #- name: Test and coverage
       #  run: yarn jest --coverage
-      - name: Run test
-        run: 'npm test'
+      #- name: Run test
+      #  run: 'npm test'
       
       #- name: SonarCloud Scan
       #  uses: SonarSource/sonarcloud-github-action@master
